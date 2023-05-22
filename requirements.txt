@@ -7,3 +7,4 @@ Jinja2==2.11.3
 MarkupSafe==2.0.1
 Werkzeug==2.0.3
 torch==1.12.1
+torchvision==0.15.2+cu117
