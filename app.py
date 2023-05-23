@@ -10,7 +10,7 @@ def predict(img):
     net.load_state_dict(torch.load("I:\\view_roast_color_app\\roast_color_app.pt", map_location=torch.device("cpu")))
     img = transform(img)
     img = img.unsqueeze(0)
-    y = torch.argmax(net(img), dim=1).cpu().detach().numpy()
+    y = torch.argmax(net(img), dim=1).cpu().detach().item()
     return y
 
 def getName(label):
@@ -37,8 +37,8 @@ def predicts():
 
         file = request.files["filename"]
         if file and allowed_file(file.filename):
-            buf = io.BytesIO() # Typoを修正（BytestIO -> BytesIO）
-            image = Image.open(file)
+            buf = io.BytesIO()
+            image = Image.open(file) 
             image.save(buf, "png")
             base64_str = base64.b64encode(buf.getvalue()).decode("utf-8")
             base64_data = "data:image/png;base64,{}".format(base64_str)
@@ -51,7 +51,7 @@ def predicts():
             elif not allowed_file(file.filename):
                 print("File type not allowed")
             return redirect(request.url)
-    
+ 
     elif request.method == "GET":
         return render_template("index.html")
     

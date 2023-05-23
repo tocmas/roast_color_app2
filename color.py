@@ -4,7 +4,7 @@ import torch.nn as nn
 
 from torchvision.models import resnet18
 
-#前処理
+# 前処理
 transform = transforms.Compose([
     transforms.Resize(256),
     transforms.CenterCrop(224),
