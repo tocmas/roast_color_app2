@@ -7,7 +7,7 @@ import base64
 
 def predict(img):
     net = Net().cpu().eval()
-    net.load_state_dict(torch.load(".\\roast_color_app.pt", map_location=torch.device("cpu")))
+    net.load_state_dict(torch.load("./roast_color_app.pt", map_location=torch.device("cpu")))
     img = transform(img)
     img = img.unsqueeze(0)
     y = torch.argmax(net(img), dim=1).cpu().detach().item()
