@@ -1,23 +1,33 @@
 import torch
-from color import transform, Net
+from torch import nn
+from color2 import preprocessing, mobilenet_v2
 from flask import Flask, request, render_template, redirect
 import io
 from PIL import Image
 import base64
 
-def predict(img):
-    net = Net().cpu().eval()
-    net.load_state_dict(torch.load("./roast_color_app.pt", map_location=torch.device("cpu")))
-    img = transform(img)
+# Define your model here. Make sure it is the same structure as the one you trained
+model = mobilenet_v2(pretrained=False) # We do not need pretrained weights
+model.classifier[1] = nn.Linear(model.last_channel, 8)  # Change output layer
+
+def predict(img, model):
+    net = model.cpu().eval()
+    net.load_state_dict(torch.load("./path_to_my_model_3.pt", map_location = torch.device("cpu")))
+    img = preprocessing(img)
     img = img.unsqueeze(0)
-    y = torch.argmax(net(img), dim=1).cpu().detach().item()
+    y = torch.argmax(model(img), dim=1).cpu().detach().item()
     return y
 
 def getName(label):
     class_names = [
-        "Class 1", "Class 2", "Class 3", "Class 4", "Class 5",
-        "Class 6", "Class 7", "Class 8", "Class 9", "Class 10",
-        "Class 11", "Class 12", "Class 13", "Class 14", "Class 15"
+        "Very light roast",
+        "Light roast",
+        "Light dark roast",
+        "Medium light roast",
+        "Medium roast",
+        "Medium dark roast",
+        "Dark roast",
+        "Very dark roast"
     ]
     return class_names[label]
     
@@ -42,7 +52,7 @@ def predicts():
             image.save(buf, "png")
             base64_str = base64.b64encode(buf.getvalue()).decode("utf-8")
             base64_data = "data:image/png;base64,{}".format(base64_str)
-            pred = predict(image)
+            pred = predict(image, model)
             colorName_= getName(pred)
             return render_template("result.html", colorName=colorName_, image = base64_data)
         else:
@@ -54,6 +64,7 @@ def predicts():
  
     elif request.method == "GET":
         return render_template("index.html")
-    
+
 if __name__ == "__main__":
     app.run(debug=True)
+    
