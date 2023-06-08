@@ -7,7 +7,7 @@ import base64
 
 def predict(img):
     net = Net().cpu().eval()
-    net.load_state_dict(torch.load("./roast_color_app3.pt", map_location=torch.device("cpu")))
+    net.load_state_dict(torch.load("./roast_color_app.pt", map_location=torch.device("cpu")))
     img = transform(img)
     img = img.unsqueeze(0)
     y = torch.argmax(net(img), dim=1).cpu().detach().item()
@@ -15,14 +15,9 @@ def predict(img):
 
 def getName(label):
     class_names = [
-        "Very light roast",
-        "Light roast",
-        "Light dark roast",
-        "Medium light roast",
-        "Medium roast",
-        "Medium dark roast",
-        "Dark roast",
-        "Very dark roast"
+        "Class 1", "Class 2", "Class 3", "Class 4", "Class 5",
+        "Class 6", "Class 7", "Class 8", "Class 9", "Class 10",
+        "Class 11", "Class 12", "Class 13", "Class 14", "Class 15"
     ]
     return class_names[label]
     
