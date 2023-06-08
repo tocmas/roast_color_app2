@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-from color2 import preprocessing, mobilenet_v2
+from color import preprocessing, mobilenet_v2
 from flask import Flask, request, render_template, redirect
 import io
 from PIL import Image
