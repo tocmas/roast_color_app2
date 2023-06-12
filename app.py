@@ -12,7 +12,7 @@ model.classifier[1] = nn.Linear(model.last_channel, 8)  # Change output layer
 
 def predict(img, model):
     net = model.cpu().eval()
-    net.load_state_dict(torch.load("./path_to_my_model_3.pt", map_location = torch.device("cpu")))
+    net.load_state_dict(torch.load("./path_to_my_model_4.pt", map_location = torch.device("cpu")))
     img = preprocessing(img)
     img = img.unsqueeze(0)
     y = torch.argmax(model(img), dim=1).cpu().detach().item()
@@ -30,8 +30,8 @@ def getName(label):
         "Very dark roast"
     ]
     return class_names[label]
-    
-app = Flask(__name__)
+   
+app = Flask(__name__, static_folder="./static")
 
 ALLOWED_EXTENSIONS = set(["png", "jpg", "gif", "jpeg"])
 
@@ -67,4 +67,3 @@ def predicts():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    

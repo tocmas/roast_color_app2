@@ -1,0 +1,33 @@
+.vl-back {
+    background: url(static/coffee_bean01_light_roast.png) no-repeat 10px center / 50px auto;
+    padding: 10px 10px 10px 70px;
+  }
+  .l-back {
+    background: url(static/coffee_bean02_cinnamon_roast.png) no-repeat 10px center / 50px auto;
+    padding: 10px 10px 10px 70px;
+  }
+  .ld-back {
+    background: url(static/coffee_bean03_medium_roast.png) no-repeat 10px center / 50px auto;
+    padding: 10px 10px 10px 70px;
+  }
+  .ml-back {
+    background: url(static/coffee_bean04_high_roast.png) no-repeat 10px center / 50px auto;
+    padding: 10px 10px 10px 70px;
+  }
+  .m-back {
+    background: url(static/coffee_bean05_city_roast.png) no-repeat 10px center / 50px auto;
+    padding: 10px 10px 10px 70px;
+  }
+  .md-back {
+    background: url(static/coffee_bean06_fullcity_roast.png) no-repeat 10px center / 50px auto;
+    padding: 10px 10px 10px 70px;
+  }
+  .d-back {
+    background: url(static/coffee_bean07_french_roast.png) no-repeat 10px center / 50px auto;
+    padding: 10px 10px 10px 70px;
+  }
+  .vd-back {
+    background: url(static/coffee_bean08_italian_roast.png) no-repeat 10px center / 50px auto;
+    padding: 10px 10px 10px 70px;
+  }
+  
