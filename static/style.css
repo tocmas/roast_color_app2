@@ -1,0 +1,17 @@
+.box {
+    width: 100%;
+  }
+  
+  .responsive {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @media (min-width: 700px) {
+    .responsive {
+      flex-direction: row;
+    }
+    .box {
+      flex: 1;
+    }
+  }  
