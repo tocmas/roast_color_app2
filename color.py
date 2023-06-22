@@ -53,8 +53,8 @@ class CustomPreprocessing:
 preprocessing = transforms.Compose([
     CustomPreprocessing(),
     transforms.ToPILImage(),
-    transforms.Resize((80, 60)),
-    transforms.CenterCrop(60), 
+    transforms.Resize((120, 90)),
+    transforms.CenterCrop(90), 
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
