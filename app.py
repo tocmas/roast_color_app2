@@ -12,7 +12,7 @@ model.classifier[1] = nn.Linear(model.last_channel, 8)  # Change output layer
 
 def predict(img, model):
     net = model.cpu().eval()
-    net.load_state_dict(torch.load("./path_to_my_model_6.pt", map_location = torch.device("cpu")))
+    net.load_state_dict(torch.load("./path_to_my_model_7.pt", map_location = torch.device("cpu")))
     img = preprocessing(img)
     img = img.unsqueeze(0)
     y = torch.argmax(model(img), dim=1).cpu().detach().item()

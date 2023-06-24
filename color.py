@@ -6,10 +6,8 @@ import numpy as np
 
 
 # 前処理
-# カスタム前処理関数
 class CustomPreprocessing:
-    def __init__(self, gamma=0.9, blur_size=(5, 5)):
-        self.gamma = gamma
+    def __init__(self, blur_size=(7, 7)):
         self.blur_size = blur_size  # ガウシアンブラーのサイズ
 
     def __call__(self, image):
@@ -39,22 +37,19 @@ class CustomPreprocessing:
         max_val = np.max(img_balanced)
         img_max_adjusted = img_balanced * (255.0 / max_val)
 
-        # ガンマ補正
-        lookup_table = np.zeros((256, 1), dtype='uint8')
-        for i in range(256):
-            lookup_table[i][0] = 255 * pow(float(i) / 255, 1.0 / self.gamma)
-        img_gamma_corrected = cv2.LUT(np.uint8(img_max_adjusted), lookup_table)
-
         # ガウシアンブラーを追加
-        img_blurred = cv2.GaussianBlur(img_gamma_corrected, self.blur_size, 10)
+        img_blurred = cv2.GaussianBlur(img_max_adjusted, self.blur_size, 5)
+
+        # convert to uint8
+        img_blurred = img_blurred.astype(np.uint8)
 
         return img_blurred
 
 preprocessing = transforms.Compose([
+    transforms.Resize((240, 180)),
+    transforms.CenterCrop(180), 
     CustomPreprocessing(),
     transforms.ToPILImage(),
-    transforms.Resize((120, 90)),
-    transforms.CenterCrop(90), 
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
