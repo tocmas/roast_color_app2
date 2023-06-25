@@ -55,7 +55,7 @@ def predicts():
             base64_data = "data:image/png;base64,{}".format(base64_str)
             pred = predict(image, model)
             colorName_= getName(pred)
-            return render_template("result.html", colorName=colorName_, image = base64_data)
+            return render_template("result.html", colorName=colorName_, image=base64_data)
         else:
             if not file:
                 print("File is empty")
@@ -67,4 +67,5 @@ def predicts():
         return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
+    # app.run(debug=True)
