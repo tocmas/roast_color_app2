@@ -48,9 +48,10 @@ def predicts():
         file = request.files["filename"]
         if file and allowed_file(file.filename):
             buf = io.BytesIO()
-            image = Image.open(file) 
+            image = Image.open(file).convert("RGB") 
             image.save(buf, "png")
             base64_str = base64.b64encode(buf.getvalue()).decode("utf-8")
+            
             base64_data = "data:image/png;base64,{}".format(base64_str)
             pred = predict(image, model)
             colorName_= getName(pred)
