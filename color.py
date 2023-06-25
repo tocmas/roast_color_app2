@@ -57,7 +57,7 @@ preprocessing = transforms.Compose([
 device = torch.device("cpu")
 
 # Move the model to the correct device
-model = mobilenet_v2(pretrained=True)
+model = mobilenet_v2(pretrained=False)
 model = model.to(device)
 
 def predict(input, model):

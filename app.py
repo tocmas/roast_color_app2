@@ -12,7 +12,7 @@ model.classifier[1] = nn.Linear(model.last_channel, 8)  # Change output layer
 
 def predict(img, model):
     net = model.cpu().eval()
-    net.load_state_dict(torch.load("./path_to_my_model_7.pt", map_location = torch.device("cpu")))
+    net.load_state_dict(torch.load("./path_to_my_model_7.pt", map_location=torch.device('cpu')))
     img = preprocessing(img)
     img = img.unsqueeze(0)
     y = torch.argmax(model(img), dim=1).cpu().detach().item()
@@ -56,12 +56,12 @@ def predicts():
             pred = predict(image, model)
             colorName_= getName(pred)
             return render_template("result.html", colorName=colorName_, image=base64_data)
-        else:
-            if not file:
-                print("File is empty")
-            elif not allowed_file(file.filename):
-                print("File type not allowed")
-            return redirect(request.url)
+        # else:
+        #     if not file:
+        #         print("File is empty")
+        #     elif not allowed_file(file.filename):
+        #         print("File type not allowed")
+        #     return redirect(request.url)
  
     elif request.method == "GET":
         return render_template("index.html")
